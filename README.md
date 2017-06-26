@@ -1,5 +1,7 @@
 # k8s-oidc-helper
 
+[![Build Status](https://travis-ci.org/coveo/k8s-oidc-helper.svg?branch=master)](https://travis-ci.org/coveo/k8s-oidc-helper)
+
 This is a small helper tool to get a user get authenticated with
 [Kubernetes OIDC](http://kubernetes.io/docs/admin/authentication/) using Google
 as the Identity Provider.
