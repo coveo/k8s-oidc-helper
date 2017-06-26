@@ -5,9 +5,9 @@ sudo: false
 install:
 - go get ./...
 script:
-- GOARCH=amd64 GOOS=windows go build . -o k8s-oidc-helper.amd64.exe
-- GOARCH=amd64 GOOS=darwin go build . -o k8s-oidc-helper.darwin.amd64
-- GOARCH=amd64 GOOS=linux go build . -o k8s-oidc-helper.linux.amd64
+- GOARCH=amd64 GOOS=windows go build -o k8s-oidc-helper.amd64.exe .
+- GOARCH=amd64 GOOS=darwin go build -o k8s-oidc-helper.darwin.amd64 .
+- GOARCH=amd64 GOOS=linux go build -o k8s-oidc-helper.linux.amd64 .
 deploy:
   provider: releases
   api_key:
