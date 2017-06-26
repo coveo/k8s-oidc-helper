@@ -75,9 +75,12 @@ roleRef:
 
 ## Installation
 
+If you're setup for go
 ```
-go get github.com/micahhausler/k8s-oidc-helper
+go get github.com/coveo/k8s-oidc-helper
 ```
+
+Else, just go to the [release page](https://github.com/coveo/k8s-oidc-helper).
 
 ## Usage
 
