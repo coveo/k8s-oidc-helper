@@ -9,7 +9,7 @@ env:
 sudo: false
 
 before_install:
-  -  GO111MODULE=off go get github.com/mattn/goveralls
+  - go get github.com/mattn/goveralls
 
 before_script:
   - go test ./...
