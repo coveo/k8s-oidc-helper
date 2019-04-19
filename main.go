@@ -14,9 +14,9 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
-const Version = "0.0.1"
+var version = "0.0.1"
 
-var version = flag.BoolP("version", "v", false, "print version and exit")
+var printVersion = flag.BoolP("version", "v", false, "print version and exit")
 
 var openBrowser = flag.BoolP("open", "o", true, "Open the oauth approval URL in the browser")
 
@@ -149,8 +149,8 @@ func main() {
 
 	flag.Parse()
 
-	if *version {
-		fmt.Printf("k8s-oidc-helper %s\n", Version)
+	if *printVersion {
+		fmt.Printf("k8s-oidc-helper %s\n", version)
 		os.Exit(0)
 	}
 
