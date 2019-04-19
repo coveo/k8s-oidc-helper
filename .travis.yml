@@ -1,21 +1,23 @@
 language: go
+
 go:
-- 1.8
+- 1.12.x
+
+env:
+- GO111MODULE=on CGO_ENABLED=0
+
 sudo: false
-install:
-- go get ./...
+
+before_install:
+  -  GO111MODULE=off go get github.com/mattn/goveralls
+
+before_script:
+  - go test ./...
+
 script:
-- GOARCH=amd64 GOOS=windows go build -o k8s-oidc-helper.amd64.exe .
-- GOARCH=amd64 GOOS=darwin go build -o k8s-oidc-helper.darwin.amd64 .
-- GOARCH=amd64 GOOS=linux go build -o k8s-oidc-helper.linux.amd64 .
-deploy:
-  provider: releases
-  api_key:
-    secure: TZl6K5Yf8sSlz7uArB/Nxr47Hf8Ad0J3BkhP1S8EJz55BQW+q1+WKOqTui5nA8YNbDOrQprbACa5dh2446oDDBeh4qn5kykudI5GjLKB13S+IKlSrYqWMML7kqKMWYpZP9qV5Y7zS7j66kdRzhyRWdzg4nNY4MXv35+PciPXJE0eLweD+4DLVJDKzTOIc5aJx4XI/qMuESgo+BLQIyJfZ/nv3JmjOxMt4s3ChhUO3ZZ7jGFiOD6WV02RlbRiArGw5vVDvzYaRXyqqnP8jOyblT1PTkB3F1gvtImyhwdVhIiDx7tgF0qZyaDt6aLDq+pZZ1W+bp5JfeYWpsLuR0ufAljDenPUAEjolD/IKv4D/deC+rPtN62StPJV//ijtbhhC/EiCRJNDShfaop2sSNF9kB2UknHzk3HP8xHRQWoImKZGYm1XL+3D2BHltG9VvJKXBI7p5mSvGEFUI9TyekMeMXACz1hkcEj3uuaR2YBxYbwm3zdGmETsunKOcVxTpvlIPHz4wdOfh8PkqlAPBRpwRH5OKUnSh73U3Kc5LXPsktOy+HaVlpSohz8HVLW1cabLIaX0B+6rWs+w2vViuzXpj61ZiEwpzvbLcqtK19b03DjtC/vMibpDLOA02gOklqqZ/5WmCGHsHW5hOUZZp3JwXwVtZ9TicsYxHtRen42u5Q=
-  file:
-    - k8s-oidc-helper.amd64.exe
-    - k8s-oidc-helper.darwin.amd64
-    - k8s-oidc-helper.linux.amd64
-  on:
-    repo: coveo/k8s-oidc-helper
-    tags: true
+  - if [ "${TRAVIS_TAG::1}" = "v" ]; then
+        curl -sL https://git.io/goreleaser | bash;
+    fi
+  
+notifications:
+  email: false
